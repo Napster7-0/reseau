@@ -3,7 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import { GenericTable, TableColumn, GenericTableItem } from '../../_ui/generic-list';
 import { Button } from '@/components/ui/button';
-import { Plus, Package } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Inventory, Warehouse } from '@/types/stock';
 import { Product } from '@/types/core';
 import { NewInventoryDialog } from './new-inventory-dialog';
@@ -108,7 +108,6 @@ export function InventoryListView({
     onInventoryCreate,
     onInventoryValidate,
     onInventoryDelete,
-    selectedInventoryId 
 }: InventoryListViewProps) {
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -167,19 +166,19 @@ export function InventoryListView({
         }
     }, [inventories, onInventorySelect]);
 
-    const handleValidate = useCallback((itemId: string) => {
-        const inventory = inventories.find(inv => inv.id === itemId);
-        if (inventory && inventory.status === 'En cours') {
-            onInventoryValidate(itemId);
-        } else {
-            alert('Seuls les inventaires en cours peuvent être validés.');
-        }
-    }, [inventories, onInventoryValidate]);
+    // const handleValidate = useCallback((itemId: string) => {
+    //     const inventory = inventories.find(inv => inv.id === itemId);
+    //     if (inventory && inventory.status === 'En cours') {
+    //         onInventoryValidate(itemId);
+    //     } else {
+    //         alert('Seuls les inventaires en cours peuvent être validés.');
+    //     }
+    // }, [inventories, onInventoryValidate]);
 
-    const handlePrint = useCallback((itemId: string) => {
-        console.log('Imprimer inventaire:', itemId);
-        // Implémentation de l'impression
-    }, []);
+    // const handlePrint = useCallback((itemId: string) => {
+    //     console.log('Imprimer inventaire:', itemId);
+    //     // Implémentation de l'impression
+    // }, []);
 
     const handleDelete = useCallback((itemId: string) => {
         const inventory = inventories.find(inv => inv.id === itemId);

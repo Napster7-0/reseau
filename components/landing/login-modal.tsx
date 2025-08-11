@@ -368,9 +368,9 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="flex items-start space-x-2">
                 <input type="checkbox" className="mt-1 rounded" required />
                 <label className="text-sm text-gray-600">
-                  J'accepte les{" "}
+                  J&apos;accepte les{" "}
                   <Button variant="link" className="text-sm p-0 h-auto">
-                    conditions d'utilisation
+                    conditions d&apos;utilisation
                   </Button>
                   {" "}et la{" "}
                   <Button variant="link" className="text-sm p-0 h-auto">

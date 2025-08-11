@@ -8,8 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Inventory, InventoryItem } from '@/types/stock';
 import { ColumnDef } from '@tanstack/react-table';
-import { Save, CheckCircle, Edit, Printer, Package, Calendar } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { Save, CheckCircle, Printer} from 'lucide-react';
 import { format } from 'date-fns';
 
 interface InventoryDetailViewProps {
@@ -84,7 +83,7 @@ export function InventoryDetailView({ inventory, onSave, onValidate }: Inventory
                             size="sm"
                         >
                             <CheckCircle className="mr-2 h-4 w-4" />
-                            Valider l'inventaire
+                            Valider l&apos;inventaire
                         </Button>
                     )}
                 </div>

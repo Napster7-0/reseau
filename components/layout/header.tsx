@@ -1,12 +1,9 @@
 "use client";
 
-import { UserNav } from "./user-nav";
 import { Button } from "../ui/button";
-import { Menu, Search, Settings, HelpCircle, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Menu, Search, Settings, HelpCircle} from "lucide-react";
 import { Input } from "../ui/input";
 import { useSidebar } from "@/hooks/useSidebar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function Header() {

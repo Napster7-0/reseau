@@ -7,8 +7,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { 
   Package,
-  ArrowDownToLine,
-  ArrowUpFromLine,
   ArrowRightLeft,
   Shuffle,
   BookOpen,

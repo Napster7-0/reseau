@@ -92,10 +92,10 @@ export function NewInventoryDialog({ isOpen, onClose, warehouses, products, onSu
     };
 
     // Filtrer les produits selon la case à cocher "Toutes les familles"
-    const filteredProducts = useMemo(() => 
-        showAllProducts ? products : products.filter(p => p.stock > 0),
-        [showAllProducts, products]
-    );
+    // const filteredProducts = useMemo(() => 
+    //     showAllProducts ? products : products.filter(p => p.stock > 0),
+    //     [showAllProducts, products]
+    // );
 
     // Produits affichés dans le tableau (seulement ceux sélectionnés)
     const displayedProducts = useMemo(() => 
@@ -310,7 +310,7 @@ export function NewInventoryDialog({ isOpen, onClose, warehouses, products, onSu
                                         <div className="flex items-center gap-3 mb-4">
                                             <Plus className="h-4 w-4 text-[#5f6368]" />
                                             <h3 className="text-base font-medium text-[#202124]">
-                                                Ajouter un produit à l'inventaire
+                                                Ajouter un produit à l&apos;inventaire
                                             </h3>
                                         </div>
 
@@ -494,7 +494,7 @@ export function NewInventoryDialog({ isOpen, onClose, warehouses, products, onSu
                                                         {displayedProducts.length === 0 && (
                                                             <tr>
                                                                 <td colSpan={6} className="p-4 text-center text-[#5f6368] text-sm">
-                                                                    Aucun produit ajouté à l'inventaire. Utilisez le formulaire ci-dessus pour ajouter des produits.
+                                                                    Aucun produit ajouté à l&apos;inventaire. Utilisez le formulaire ci-dessus pour ajouter des produits.
                                                                 </td>
                                                             </tr>
                                                         )}

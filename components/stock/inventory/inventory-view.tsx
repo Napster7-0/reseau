@@ -5,7 +5,7 @@ import { Inventory, Warehouse, InventoryItem } from '@/types/stock';
 import { Product } from '@/types/core';
 import { InventoryListView } from './inventory-list-view';
 import { InventoryModalView } from './inventory-modal-view';
-import { updateInventory, createInventory, getProducts, updateProduct, getInventories } from '@/lib/api';
+import { updateInventory, createInventory, updateProduct, getInventories } from '@/lib/api';
 
 interface InventoryViewProps {
     initialInventories: Inventory[];

@@ -29,7 +29,7 @@ export function InventoryModalView({
             <div className="bg-white rounded-lg w-[90%] h-[90%] max-w-6xl overflow-hidden">
                 <div className="p-4 border-b border-[#e8eaed] flex items-center justify-between">
                     <h2 className="text-lg font-medium text-[#202124]">
-                        Détails de l'inventaire - {inventory.reference}
+                        Détails de l&apos;inventaire - {inventory.reference}
                     </h2>
                     <div className="flex items-center gap-2">
                         <Button

@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { CalendarDays, Filter, Search } from 'lucide-react';
+import { Filter, Search } from 'lucide-react';
 
 // Composant d'en-tête avec filtres pour le journal
 function JournalFiltersHeader() {
@@ -15,7 +15,7 @@ function JournalFiltersHeader() {
     const [dateTo, setDateTo] = useState('28-May-25');
     const [movementSource, setMovementSource] = useState('all');
     const [warehouse, setWarehouse] = useState('all');
-    const [customMovement, setCustomMovement] = useState('');
+    // const [customMovement, setCustomMovement] = useState('');
 
     return (
         <div className="bg-white border-b border-[#e8eaed] font-['Google_Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif]">
@@ -23,7 +23,7 @@ function JournalFiltersHeader() {
             <div className="flex items-center justify-between p-4 pt-2 border-b border-[#e8eaed]">
                 <div className="flex items-center gap-3">
                     <Filter className="h-4 w-4 text-[#5f6368]" />
-                    <h1 className="text-lg font-medium text-[#202124]">Critères d'analyse du journal</h1>
+                    <h1 className="text-lg font-medium text-[#202124]">Critères d&apos;analyse du journal</h1>
                 </div>
                 <div className="space-y-3">
                         <div className="flex items-center gap-3">

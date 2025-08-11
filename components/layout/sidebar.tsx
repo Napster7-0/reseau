@@ -3,10 +3,9 @@
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/hooks/useSidebar";
 import { Button } from "../ui/button";
-import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { navigationItems, NavigationItem } from "@/config/nav";
+import { navigationItems} from "@/config/nav";
 
 export function Sidebar() {
   const { isCollapsed } = useSidebar();
@@ -29,7 +28,7 @@ export function Sidebar() {
       {/* Navigation */}
       <div className="flex-1 pt-6 pb-4">
         <nav className={cn("space-y-1", isCollapsed ? "px-2" : "px-4")}>
-          {navigationItems.map((item, index) => {
+          {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeRoute === item.route;
             const isPrimary = item.isPrimary;

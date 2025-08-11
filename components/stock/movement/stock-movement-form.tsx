@@ -12,7 +12,7 @@ import { Product } from '@/types/core';
 import { Warehouse, StockMovementItem } from '@/types/stock';
 import { createStockMovement, updateProduct } from '@/lib/api';
 import { ColumnDef } from '@tanstack/react-table';
-import { Plus, Trash2, Save, Package, ArrowUpCircle, ArrowDownCircle, RefreshCw, ChevronDown } from 'lucide-react';
+import { Plus, Trash2, Save, Package, ArrowUpCircle, ArrowDownCircle, RefreshCw} from 'lucide-react';
 
 interface StockMovementFormProps {
     products: Product[];
@@ -36,7 +36,7 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
     const form = useForm<FormValues>({
         defaultValues: { type: 'entry', warehouseId: '', reference: '', date: new Date(), notes: '', items: [] }
     });
-    const { control, handleSubmit, setValue, getValues, reset } = form;
+    const { control, handleSubmit, setValue, reset } = form;
     const { fields, append, remove } = useFieldArray({ control, name: "items" });
 
     const movementType = form.watch('type');
@@ -97,7 +97,9 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
             date: data.date.toISOString(),
             warehouseId: data.warehouseId,
             notes: data.notes,
-            items: data.items.map(({ productId, quantity, costPrice }) => ({ productId, quantity, costPrice }))
+            items: data.items.map(({ productId, quantity, costPrice }) => ({ productId, quantity, costPrice })),
+            source: "manual" as 'manual', // valeur par défaut
+            status: "draft" as 'draft', // valeur par défaut
         };
 
         try {
@@ -276,8 +278,8 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
                                 </div>
 
                                 {/* Référence */}
-                                <div className="flex items-center gap-3">
-                                    <FormLabel className="text-sm font-medium text-[#5f6368] min-w-[70px]">Nos Références</FormLabel>
+                                <div className="flex items-center gap-2">
+                                    <FormLabel className="text-sm font-medium text-[#5f6368] min-w-[70px]">Nos Ref</FormLabel>
                                     <FormField control={control} name="reference" render={({field}) => (
                                         <FormItem>
                                             <Input 
@@ -289,8 +291,8 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
                                     )}/>
                                 </div>
                                 {/* Référence */}
-                                <div className="flex items-center gap-3">
-                                    <FormLabel className="text-sm font-medium text-[#5f6368] min-w-[70px]">Vos Références</FormLabel>
+                                <div className="flex items-center gap-2">
+                                    <FormLabel className="text-sm font-medium text-[#5f6368] min-w-[70px]">Vos Ref</FormLabel>
                                     <FormField control={control} name="reference" render={({field}) => (
                                         <FormItem>
                                             <Input 

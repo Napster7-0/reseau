@@ -10,9 +10,7 @@ import {
   Users, 
   TrendingUp, 
   Shield, 
-  Zap, 
-  Globe,
-  CheckCircle,
+  Zap,
   ArrowRight,
   Menu,
   X
@@ -154,7 +152,7 @@ export function LandingPage() {
               </span>
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              KSM vous offre une suite complète d'outils pour gérer efficacement vos stocks, 
+              KSM vous offre une suite complète d&apos;outils pour gérer efficacement vos stocks, 
               clients, ventes et analyses. Transformez votre entreprise avec notre solution tout-en-un.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
@@ -233,7 +231,7 @@ export function LandingPage() {
             Prêt à révolutionner votre entreprise ?
           </h2>
           <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-            Rejoignez des centaines d'entreprises qui font déjà confiance à KSM 
+            Rejoignez des centaines d&apos;entreprises qui font déjà confiance à KSM 
             pour optimiser leurs opérations commerciales.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -249,7 +247,7 @@ export function LandingPage() {
               variant="outline"
               className="border-white text-white hover:bg-white/10 px-8 py-3 text-lg"
             >
-              Contacter l'équipe
+              Contacter l&apos;équipe
             </Button>
           </div>
         </div>
@@ -282,7 +280,7 @@ export function LandingPage() {
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Centre d'aide</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Centre d&apos;aide</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>

@@ -27,7 +27,6 @@ interface ToolbarProps {
 export function Toolbar({
   isAllSelected,
   isPartiallySelected,
-  selectedCount,
   totalCount,
   currentPage,
   totalPages,
