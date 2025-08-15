@@ -160,7 +160,7 @@ export function NewInventoryDialog({ isOpen, onClose, warehouses, products, onSu
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="w-auto min-w-[95vw] h-auto min-h-[95vh] overflow-hidden">
+            <DialogContent className="w-auto min-w-[95vw] h-auto min-h-[95vh] overflow-hidden bg-white shadow-xl border border-gray-200 rounded-lg">
                 <DialogHeader>
                     <DialogTitle className="text-xl font-medium text-[#202124]">
                         Nouvel Inventaire

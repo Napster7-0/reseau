@@ -135,17 +135,17 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
             )
         },
         { 
-            accessorKey: "quantity", 
-            header: "Qté",
-            cell: ({ row }) => (
-                <span className="text-sm font-medium text-[#202124] text-center">{row.original.quantity}</span>
-            )
-        },
-        { 
             accessorKey: "stockBefore", 
             header: "Solde Avt",
             cell: ({ row }) => (
                 <span className="text-sm text-[#5f6368] text-center">{row.original.stockBefore || 0}</span>
+            )
+        },
+        { 
+            accessorKey: "quantity", 
+            header: "Qté",
+            cell: ({ row }) => (
+                <span className="text-sm font-medium text-[#202124] text-center">{row.original.quantity}</span>
             )
         },
         { 
@@ -224,7 +224,7 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
                                     <SelectValue />
                                 </div>
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="bg-white border border-gray-200 shadow-lg rounded-md">
                                 <SelectItem value="entry" className="text-sm">
                                     <div className="flex items-center gap-2">
                                         <ArrowUpCircle className="h-4 w-4 text-[#137333]" />
@@ -265,7 +265,7 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
                                                 <SelectTrigger className="h-9 w-64 border-[#dadce0] focus:border-[#1a73e8]">
                                                     <SelectValue placeholder="Sélectionner..."/>
                                                 </SelectTrigger>
-                                                <SelectContent>
+                                                <SelectContent className="bg-white border border-gray-200 shadow-lg rounded-md">
                                                     {warehouses.map(w => (
                                                         <SelectItem key={w.id} value={w.id} className="text-sm">
                                                             {w.name}
@@ -393,8 +393,8 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
                                 </span>
                             </div>
                             {fields.length > 0 && (
-                                <div className="text-sm text-[#5f6368]">
-                                    Total: <span className="font-medium text-[#202124]">
+                                <div className="text-sm text-[#5f6368] font-semibold">
+                                    Total: <span className="font-bold text-[#1a73e8]">
                                         {totalValue.toLocaleString()} F
                                     </span>
                                 </div>

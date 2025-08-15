@@ -66,7 +66,10 @@
 }
 
 /* --- Light Theme --- */
+/* Correction transparence modals/popovers */
 :root {
+  --background: oklch(1 0 0); /* blanc pur */
+  --popover: oklch(1 0 0); /* blanc pur */
   --radius: 0.75rem;
   /* Unchanged, soft radius */
 

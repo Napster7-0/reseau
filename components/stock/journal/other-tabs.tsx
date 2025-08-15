@@ -23,7 +23,7 @@ function JournalFiltersHeader() {
             <div className="flex items-center justify-between p-4 pt-2 border-b border-[#e8eaed]">
                 <div className="flex items-center gap-3">
                     <Filter className="h-4 w-4 text-[#5f6368]" />
-                    <h1 className="text-lg font-medium text-[#202124]">Critères d&apos;analyse du journal</h1>
+                    <h1 className="text-lg font-medium text-[#202124]">Critères d'analyse du journal</h1>
                 </div>
                 <div className="space-y-3">
                         <div className="flex items-center gap-3">
@@ -84,7 +84,7 @@ function JournalFiltersHeader() {
                                 <SelectTrigger className="h-9 w-48 border-[#dadce0] focus:border-[#1a73e8] bg-white">
                                     <SelectValue placeholder="Toute" />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className='bg-white border border-gray-200 shadow-lg rounded-md'>
                                     <SelectItem value="all">Toute</SelectItem>
                                     <SelectItem value="entrepot-a">Entrepôt A</SelectItem>
                                     <SelectItem value="entrepot-b">Entrepôt B</SelectItem>
@@ -232,18 +232,18 @@ const journalColumns: TableColumn[] = [
     type: 'text'
   },
   {
-    key: 'quantity',
-    label: 'Quantité',
-    width: 'w-20',
-    align: 'right',
-    sortable: true,
-    type: 'number'
-  },
-  {
     key: 'date',
     label: 'Date/Heure',
     width: 'w-32',
     align: 'center',
+    sortable: true,
+    type: 'text'
+  },
+  {
+    key : 'refDocument',
+    label:'Ref Doc',
+    width: 'w-24',
+    align: 'left',
     sortable: true,
     type: 'text'
   }
