@@ -1,4 +1,7 @@
-@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* @import "tw-animate-css"; */
 
 /* Define the custom variant for dark mode (unchanged) */
@@ -221,31 +224,15 @@
 }
 
 /* --- Base Styles --- */
-@layer base {
-  * {
-    @apply border-border;
-  }
 
-  body {
-    @apply bg-background text-foreground antialiased;
-    @apply transition-colors duration-200 ease-in-out;
-  }
 
-  /* Enhanced input styles for better readability */
-  input,
-  textarea,
-  select {
-    @apply bg-input text-foreground border-border;
-    @apply focus:ring-2 focus:ring-ring focus:outline-none;
-    @apply placeholder:text-muted-foreground;
-    @apply rounded-md px-3 py-2;
-  }
 
-  .bg-grid-pattern {
-    background-image: linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
+
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

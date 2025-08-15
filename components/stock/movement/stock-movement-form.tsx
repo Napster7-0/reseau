@@ -210,11 +210,11 @@ export function StockMovementForm({ products, warehouses }: StockMovementFormPro
     return (
         <div className="h-full bg-white font-['Google_Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif]">
             {/* Header avec sélecteur de type */}
-            <div className="flex items-center justify-between p-4 pt-1 border-b border-[#e8eaed]">
-                <div className="flex items-center gap-3">
+            <div className="flex items-center justify-start p-4 pt-1 border-b border-[#e8eaed]">
+                {/* <div className="flex items-center gap-3">
                     {getMovementIcon()}
                     <h1 className="text-lg font-medium text-[#202124]">{getMovementLabel()}</h1>
-                </div>
+                </div> */}
                 <div className="flex items-center gap-2">
                     <span className="text-sm text-[#5f6368]">Type de mouvement:</span>
                     <FormField control={control} name="type" render={({field}) => (

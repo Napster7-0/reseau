@@ -1,12 +1,11 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: false,
   experimental: {
     optimizePackageImports: ["@radix-ui/react-icons"],
   },
   webpack: (config, { isServer }) => {
-    // Fix for webpack build issues with React 19
+    // Fix for webpack build issues
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -17,4 +16,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
