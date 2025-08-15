@@ -46,23 +46,21 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('login');
 
-  const loginForm = useForm<LoginFormData>();
-  const registerForm = useForm<RegisterFormData>();
+  const loginForm = useForm<LoginFormData>({ mode: 'onChange' });
+  const registerForm = useForm<RegisterFormData>({ mode: 'onChange' });
 
   const handleLogin = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      // Simulation d'une connexion
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Ici vous pourriez ajouter votre logique d'authentification
-      console.log('Login:', data);
-      
-      // Redirection vers le dashboard
+      // Appel API json-server (remplacez l'URL par celle de votre json-server déployé)
+  const res = await fetch('http://localhost:3001/users?email=' + encodeURIComponent(data.email));
+      const users = await res.json();
+      const user = users.find((u: any) => u.password === data.password);
+      if (!user) throw new Error('Identifiants invalides');
       router.push('/dashboard');
       onClose();
-    } catch (error) {
-      console.error('Erreur de connexion:', error);
+    } catch (error: any) {
+      alert(error.message || 'Erreur de connexion');
     } finally {
       setIsLoading(false);
     }
@@ -71,16 +69,26 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const handleRegister = async (data: RegisterFormData) => {
     setIsLoading(true);
     try {
-      // Simulation d'une inscription
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Ici vous pourriez ajouter votre logique d'inscription
-      console.log('Register:', data);
-      
-      // Basculer vers l'onglet connexion après inscription
+      // Vérification email déjà utilisé
+  const checkRes = await fetch('http://localhost:3001/users?email=' + encodeURIComponent(data.email));
+      const existing = await checkRes.json();
+      if (existing.length > 0) throw new Error('Email déjà utilisé');
+      // Création utilisateur
+  const res = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          company: data.company,
+          password: data.password
+        })
+      });
+      if (!res.ok) throw new Error('Erreur lors de la création du compte');
       setActiveTab('login');
-    } catch (error) {
-      console.error('Erreur d\'inscription:', error);
+    } catch (error: any) {
+      alert(error.message || 'Erreur d\'inscription');
     } finally {
       setIsLoading(false);
     }
@@ -93,23 +101,23 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
-        <DialogHeader className="space-y-3">
+  <DialogContent className="sm:max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-xl border border-gray-200">
+  <DialogHeader className="space-y-3 pb-2 border-b border-gray-100">
           <div className="flex items-center justify-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
               <Building2 className="h-5 w-5 text-white" />
             </div>
-            <DialogTitle className="text-xl font-bold text-gray-900">
+            <DialogTitle className="text-xl font-bold text-gray-900 tracking-tight">
               KSM
             </DialogTitle>
           </div>
-          <p className="text-sm text-gray-600 text-center">
+          <p className="text-sm text-gray-500 text-center">
             Accédez à votre espace de gestion commerciale
           </p>
         </DialogHeader>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full mt-2">
+          <TabsList className="grid w-full grid-cols-2 bg-gray-100 rounded-lg mb-2">
             <TabsTrigger value="login">Connexion</TabsTrigger>
             <TabsTrigger value="register">Inscription</TabsTrigger>
           </TabsList>
@@ -120,7 +128,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                   <Input
                     id="email"
                     type="email"
@@ -143,7 +151,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="space-y-2">
                 <Label htmlFor="password">Mot de passe</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -161,8 +169,9 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-1 top-1 h-8 w-8 p-0"
+                    className="absolute right-1 top-1 h-8 w-8 p-0 text-gray-500 hover:text-gray-700"
                     onClick={() => setShowPassword(!showPassword)}
+                    tabIndex={-1}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -181,35 +190,35 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   <input type="checkbox" className="rounded" />
                   <span>Se souvenir de moi</span>
                 </label>
-                <Button variant="link" className="text-sm p-0 h-auto">
+                <Button variant="link" className="text-sm p-0 h-auto text-blue-600 hover:underline">
                   Mot de passe oublié ?
                 </Button>
               </div>
 
               <Button 
                 type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm"
                 disabled={isLoading}
               >
                 {isLoading ? "Connexion..." : "Se connecter"}
               </Button>
             </form>
 
-            <div className="relative">
+            <div className="relative my-2">
               <div className="absolute inset-0 flex items-center">
                 <Separator className="w-full" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-gray-500">Ou continuer avec</span>
+                <span className="bg-white px-2 text-gray-400">Ou continuer avec</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-3 mt-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => handleSocialLogin('Google')}
-                className="w-full"
+                className="w-full border-gray-200"
               >
                 <Chrome className="h-4 w-4" />
               </Button>
@@ -217,7 +226,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 variant="outline"
                 size="sm"
                 onClick={() => handleSocialLogin('Facebook')}
-                className="w-full"
+                className="w-full border-gray-200"
               >
                 <Facebook className="h-4 w-4" />
               </Button>
@@ -225,7 +234,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 variant="outline"
                 size="sm"
                 onClick={() => handleSocialLogin('GitHub')}
-                className="w-full"
+                className="w-full border-gray-200"
               >
                 <Github className="h-4 w-4" />
               </Button>
@@ -239,7 +248,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 <div className="space-y-2">
                   <Label htmlFor="firstName">Prénom</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                     <Input
                       id="firstName"
                       placeholder="Jean"
@@ -255,7 +264,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 <div className="space-y-2">
                   <Label htmlFor="lastName">Nom</Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <User className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                     <Input
                       id="lastName"
                       placeholder="Dupont"
@@ -272,7 +281,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="space-y-2">
                 <Label htmlFor="registerEmail">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                   <Input
                     id="registerEmail"
                     type="email"
@@ -295,7 +304,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="space-y-2">
                 <Label htmlFor="company">Entreprise</Label>
                 <div className="relative">
-                  <Building2 className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Building2 className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                   <Input
                     id="company"
                     placeholder="Nom de votre entreprise"
@@ -311,7 +320,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="space-y-2">
                 <Label htmlFor="registerPassword">Mot de passe</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                   <Input
                     id="registerPassword"
                     type={showPassword ? "text" : "password"}
@@ -329,8 +338,9 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-1 top-1 h-8 w-8 p-0"
+                    className="absolute right-1 top-1 h-8 w-8 p-0 text-gray-500 hover:text-gray-700"
                     onClick={() => setShowPassword(!showPassword)}
+                    tabIndex={-1}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -347,7 +357,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
                   <Input
                     id="confirmPassword"
                     type={showPassword ? "text" : "password"}
@@ -381,7 +391,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
               <Button 
                 type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm"
                 disabled={isLoading}
               >
                 {isLoading ? "Création du compte..." : "Créer mon compte"}
@@ -390,7 +400,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           </TabsContent>
         </Tabs>
 
-        <div className="text-center text-sm text-gray-500 mt-6">
+  <div className="text-center text-sm text-gray-400 mt-6">
           <p>
             Vous avez des questions ?{" "}
             <Button variant="link" className="text-sm p-0 h-auto">

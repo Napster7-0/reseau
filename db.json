@@ -892,7 +892,8 @@
       "title": "Superviseur Général",
       "profileId": "profile-admin",
       "creationDate": "2020-01-01T00:00:00.000Z",
-      "password": "admin"
+      "email": "admin@reseau.com",
+      "password": "admin12"
     },
     {
       "id": "user-002",
@@ -901,6 +902,7 @@
       "title": "Caissière Principale",
       "profileId": "profile-caissiere",
       "creationDate": "2022-07-22T00:00:00.000Z",
+      "email": "stella@reseau.com",
       "password": "password123"
     },
     {
@@ -910,6 +912,7 @@
       "title": "Magasinier",
       "profileId": "profile-magasinier",
       "creationDate": "2022-07-22T00:00:00.000Z",
+      "email": "julio@reseau.com",
       "password": "password123"
     },
     {
@@ -917,9 +920,10 @@
       "code": "Optimus",
       "name": "Abadaxx",
       "title": "OptimusPrime",
-      "password": "theabada123",
       "profileId": "profile-admin",
-      "creationDate": "2025-07-30T13:21:06.465Z"
+      "creationDate": "2025-07-30T13:21:06.465Z",
+      "email": "abadaxx@reseau.com",
+      "password": "theabada123"
     }
   ],
   "profiles": [
